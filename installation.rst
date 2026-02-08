@@ -675,8 +675,19 @@ and the `lima "default" template <https://github.com/lima-vm/lima/blob/master/te
 for more details.
 
 By default, the host home directory is mounted as read-only in the guest,
-but there is also a shared writable directory mounted in ``/tmp/lima``
+but you can add a shared writable directory mounted in ``/tmp/lima``
 that can be accessed both from the host and in the guest.
+To do so, you have to change the ``~/.lima/apptainer/lima.yaml`` file's
+end to include the writable mount point to:
+
+.. code::
+
+   mounts:
+   - location: "~"
+   - location: "{{.GlobalTempDir}}/lima"
+     mountPoint: /tmp/lima
+     writable: true
+
 
 **********************
  Running inside Docker
